@@ -42,15 +42,17 @@ allocation_results = pd.read_csv(output)
 
 st.title("🎓 Seat Allocation Results Dashboard")
 
-# --- Debug: Show all allocated seats ---
-st.subheader("📋 All Allocated Seats (Debug Mode)")
+# Show all allocated seats
+st.subheader("📋 All Allocated Seats")
 st.dataframe(allocation_results)
 
 # --- Student lookup ---
 unique_id = st.text_input("Enter your UniqueID:")
 
 if unique_id:
-    student_result = allocation_results[allocation_results["UniqueID"] == unique_id]
+    # Convert both sides to string to avoid type mismatch
+    allocation_results["UniqueID"] = allocation_results["UniqueID"].astype(str)
+    student_result = allocation_results[allocation_results["UniqueID"] == str(unique_id).strip()]
 
     if not student_result.empty:
         st.success("✅ Seat allocated!")
