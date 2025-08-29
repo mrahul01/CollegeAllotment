@@ -1,8 +1,11 @@
 import streamlit as st
 import pandas as pd
 
-# Load allocation results
-allocation_results = pd.read_csv("Allocation_Results.csv")
+file_id = "1MZvqRk8-Ey_OLouqFLhQLaOtdSyVzkOQ"
+download_url = f"https://drive.google.com/uc?id={file_id}"
+
+# Load allocation results directly from Google Drive
+allocation_results = pd.read_csv(download_url)
 
 # Optional: Load not allocated students if needed
 # not_allocated = pd.read_csv("Not_Allocated.csv")
