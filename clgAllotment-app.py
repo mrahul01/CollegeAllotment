@@ -48,7 +48,7 @@ st.dataframe(allocation_results)
 
 # --- Student lookup ---
 unique_id = st.text_input("Enter your UniqueID:")
-
+st.write(unique_id)
 if unique_id:
     # Convert both sides to string to avoid type mismatch
     allocation_results["UniqueID"] = allocation_results["UniqueID"].astype(str)
