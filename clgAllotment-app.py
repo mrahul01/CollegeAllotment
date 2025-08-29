@@ -1,13 +1,17 @@
 import streamlit as st
 import pandas as pd
+import gdown
 
-download_url = "https://drive.google.com/uc?id=1MZvqRk8-Ey_OLouqFLhQLaOtdSyVzkOQ"
+# Google Drive File ID
+file_id = "1MZvqRk8-Ey_OLouqFLhQLaOtdSyVzkOQ"
+download_url = f"https://drive.google.com/uc?id={file_id}"
 
-# Load CSV directly from Google Drive
-allocation_results = pd.read_csv(download_url)
+# Download file locally (Streamlit Cloud safe)
+output = "Allocation_Results.csv"
+gdown.download(download_url, output, quiet=False)
 
-# Optional: Load not allocated students if needed
-# not_allocated = pd.read_csv("Not_Allocated.csv")
+# Load CSV
+allocation_results = pd.read_csv(output)
 
 st.title("🎓 Seat Allocation Results Dashboard")
 
@@ -26,4 +30,3 @@ if unique_id:
         ]].reset_index(drop=True))
     else:
         st.error("❌ No seat allocated for this UniqueID.")
-
